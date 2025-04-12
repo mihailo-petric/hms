@@ -47,9 +47,20 @@ dependencies {
   testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
 
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'com.h2database:h2:2.3.232'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-tasks.named('test') {
-  useJUnitPlatform()
+tasks.named("test") {
+  useJUnitPlatform {
+    excludeTags("integration")
+  }
+}
+
+tasks.register('integrationTest', Test) {
+  useJUnitPlatform {
+    includeTags 'integration'
+  }
+  testClassesDirs = sourceSets.test.output.classesDirs
+  classpath = sourceSets.test.runtimeClasspath
 }
