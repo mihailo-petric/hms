@@ -5,6 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+/**
+ * EmployeeDTO is a Data Transfer Object (DTO) that represents an employee's data.
+ * It is used to transfer employee information between different layers of the application.
+ * This class contains fields for personal ID, name, team, and team lead.
+ * The personal ID is used to uniquely identify an employee.
+ */
 @Data
 public class EmployeeDTO {
 

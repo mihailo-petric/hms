@@ -7,6 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+/**
+ * Employee entity class representing an employee in the system.
+ * This class is mapped to the "employees" table in the database.
+ * It contains fields for personal ID, name, team, and team lead.
+ * The personal ID is auto-generated and serves as the primary key.
+ */
 @Entity(name = "employees")
 @Data
 public class Employee {

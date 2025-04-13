@@ -10,6 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+/**
+ * EmployeeController is a REST controller that handles HTTP requests related to employee management.
+ * */
 @RestController
 @RequestMapping("/api/v1/employee")
 @RequiredArgsConstructor
