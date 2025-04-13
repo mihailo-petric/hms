@@ -45,6 +45,76 @@ databaseChangeLog:
                   type: varchar(100)
                   constraints:
                     nullable: false
+  - changeSet:
+      id: insert-employees
+      author: mpetric
+      preConditions:
+        onFail: MARK_RAN
+        onFailMessage: "Table employees already exists"
+      changes:
+        - tag:
+            - insert-hms-employees
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: personal_id
+                  valueNumeric: 123456
+              - column:
+                  name: name
+                  value: "Mirko"
+              - column:
+                  name: team
+                  value: "Development"
+              - column:
+                  name: team_lead
+                  value: "Mirko"
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: personal_id
+                  valueNumeric: 987654
+              - column:
+                  name: name
+                  value: "Predrag"
+              - column:
+                  name: team
+                  value: "Development"
+              - column:
+                  name: team_lead
+                  value: "Mirko"
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: personal_id
+                  valueNumeric: 654321
+              - column:
+                  name: name
+                  value: "Petar"
+              - column:
+                  name: team
+                  value: "Development"
+              - column:
+                  name: team_lead
+                  value: "Mirko"
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: personal_id
+                  valueNumeric: 321654
+              - column:
+                  name: name
+                  value: "Vojislav"
+              - column:
+                  name: team
+                  value: "Development"
+              - column:
+                  name: team_lead
+                  value: "Mirko"
+
 
 
 
