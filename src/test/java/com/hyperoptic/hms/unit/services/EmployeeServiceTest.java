@@ -41,18 +41,6 @@ class EmployeeServiceTest {
     employeeService = spy(new EmployeeServiceImpl(employeeRepository, modelMapper));
   }
 
-  /*
-    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
-    log.debug("Creating employee with details: {}", employeeDTO);
-    if (employeeDTO.getPersonalId() != null) {
-      throw new CreateEmployeeException();
-    }
-    Employee employee = modelMapper.map(employeeDTO, Employee.class);
-    Employee savedEmployee = employeeRepository.save(employee);
-    return modelMapper.map(savedEmployee, EmployeeDTO.class);
-  }
-    **/
-
   @Test
   void givenValidEmployeeDTO_whenCreateEmployee_thenReturnCreatedEmployee() {
     var employeeDTO = createEmployeeDTO();

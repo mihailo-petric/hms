@@ -3,6 +3,7 @@ plugins {
   id 'org.springframework.boot' version '3.4.4'
   id 'io.spring.dependency-management' version '1.1.7'
   id 'com.diffplug.spotless' version '7.0.2'
+  id 'jacoco'
 }
 
 spotless {
@@ -29,9 +30,7 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.boot:spring-boot-starter-validation'
-  implementation 'io.springfox:springfox-boot-starter:3.0.0'
-  implementation 'io.springfox:springfox-swagger-ui:3.0.0'
-  implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
+  implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
   implementation 'org.modelmapper:modelmapper:3.2.2'
   implementation 'org.liquibase:liquibase-core'
 
@@ -55,6 +54,7 @@ tasks.named("test") {
   useJUnitPlatform {
     excludeTags("integration")
   }
+  finalizedBy jacocoTestReport
 }
 
 tasks.register('integrationTest', Test) {
@@ -64,3 +64,43 @@ tasks.register('integrationTest', Test) {
   testClassesDirs = sourceSets.test.output.classesDirs
   classpath = sourceSets.test.runtimeClasspath
 }
+
+jacocoTestCoverageVerification {
+  dependsOn test
+
+  violationRules {
+    rule {
+      element = 'PACKAGE'
+      includes = ['com.hyperoptic.hms.services']
+
+      limit {
+        counter = 'BRANCH'
+        minimum = 1.0
+      }
+    }
+  }
+}
+
+jacocoTestReport {
+  dependsOn test
+
+  reports {
+    xml.required = true
+    html.required = true
+    csv.required = false
+  }
+
+  classDirectories.setFrom(
+    fileTree(dir: "$buildDir/classes/java/main", includes: [
+      'com/hyperoptic/hms/services/**'
+    ])
+  )
+
+  sourceDirectories.setFrom(files('src/main/java'))
+  executionData.setFrom(fileTree(dir: buildDir, includes: [
+    'jacoco/test.exec', 'jacoco/test*.exec'
+  ]))
+}
+
+check.dependsOn 'jacocoTestCoverageVerification'
+test.finalizedBy 'jacocoTestReport'
