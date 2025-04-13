@@ -36,4 +36,5 @@ There is "Production" mode available.
 ### TODO:
 
 - Add mutation tests
-- Add TLS for production 
+- Add TLS for production
+- CI/CD
