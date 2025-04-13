@@ -15,6 +15,7 @@ cd scripts
 ./setupLocal.sh
 ./startLocalServer.sh
 ```
+Swagger url: http://localhost:8080/swagger-ui/index.html
 
 There is "Production" mode available. 
 
