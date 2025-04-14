@@ -158,12 +158,13 @@ public class EmployeeControllerTest {
 
   @Test
   public void givenSearchParamsWhenSearchEmployeesThenReturn200AndFilteredEmployees() {
-    String url = getBaseUrl() + "/search?name=John&page=0&size=10";
+    String url = getBaseUrl() + "/search?name=Alice Johnson";
 
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).contains("content");
+    assertThat(response.getBody()).contains("Alice Johnson");
   }
 
   private <T> ResponseEntity<T> postForEntity(EmployeeDTO dto, Class<T> responseType) {
